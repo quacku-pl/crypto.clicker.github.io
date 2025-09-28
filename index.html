@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Crypto Clicker Neon</title>
+
+<!-- Favicon (💰 emoji as tab icon) -->
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💰</text></svg>">
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap');
+  body{margin:0;font-family:'Orbitron',sans-serif;background:#0d0f24;color:#eee;display:flex;justify-content:center;padding:20px}
+  .wrap{max-width:1100px;width:100%;display:grid;grid-template-columns:1fr 350px;gap:20px}
+  .panel{background:#151b34;border:2px solid #2a325a;border-radius:12px;padding:16px;box-shadow:0 0 12px #111}
+  h1,h2,h3{margin:8px 0;color:#00f7ff;text-shadow:0 0 6px #00f7ff}
+  #bigBtn{background:radial-gradient(circle,#00ffe5 0%,#0099ff 100%);border:none;color:#012;
+    font-size:28px;font-weight:bold;padding:40px;border-radius:50%;cursor:pointer;
+    box-shadow:0 0 20px #00f7ff,0 0 40px #0099ff;transition:transform .1s}
+  #bigBtn:hover{transform:scale(1.05)}
+  .stats{display:flex;gap:10px;flex-wrap:wrap;margin:10px 0}
+  .stat{background:#1f2a4d;padding:6px 12px;border-radius:8px;font-size:14px;color:#0ff}
+  .log{height:180px;overflow:auto;background:#10162d;padding:8px;border-radius:8px;font-size:13px}
+  .shop button{margin:6px 0;padding:10px;width:100%;border:none;border-radius:8px;
+    background:linear-gradient(90deg,#4a00e0,#8e2de2);color:#fff;cursor:pointer;font-weight:bold}
+  .shop button:hover{opacity:0.9}
+  input,select{width:100%;padding:8px;border-radius:6px;border:1px solid #333;background:#0d0f24;color:#fff;margin:4px 0}
+  .btn{background:#00ffe5;color:#012;border:none;padding:10px 14px;border-radius:8px;cursor:pointer;font-weight:bold}
+  .btn:disabled{background:#444;color:#888;cursor:not-allowed}
+  #portfolio div{margin:4px 0;padding:6px;background:#1f2a4d;border-radius:6px}
+  #kycForm{margin-top:12px}
+  label{font-size:13px;color:#9ef}
+  .adSlot{margin:10px auto;text-align:center;padding:10px;background:#222;color:#aaa;border:1px dashed #555}
+  footer{margin-top:20px;text-align:center;font-size:14px;color:#0ff;text-shadow:0 0 4px #00f7ff}
+  .testBanner{text-align:center;margin:10px 0;color:#ff0;text-shadow:0 0 6px #f00;font-weight:bold}
+  .socialLinks{text-align:center;margin:10px 0}
+  .socialLinks a{margin:0 8px;color:#00f7ff;text-decoration:none;font-weight:bold}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="panel">
+    <!-- Top Ad -->
+    <div id="adTop" class="adSlot">
+      <script>
+        // YOUR_AD_CODE_HERE
+      </script>
+    </div>
+
+    <h1>Crypto Clicker ⚡</h1>
+
+    <!-- Test banner -->
+    <div class="testBanner">⚠️ To jest strona testowa ⚠️</div>
+
+    <!-- Social links -->
+    <div class="socialLinks">
+      <a href="https://www.twitch.tv/quacku_pl" target="_blank">Twitch</a>
+      <a href="https://www.youtube.com/@Quacku_Pl" target="_blank">YouTube</a>
+    </div>
+
+    <div class="stats">
+      <div class="stat">Clicks: <span id="clickCount">0</span></div>
+      <div class="stat">Wins: <span id="winCount">0</span></div>
+      <div class="stat">SimBalance: <span id="balanceSim">0</span></div>
+    </div>
+    <div style="text-align:center;margin:20px 0">
+      <button id="bigBtn">CLICK</button>
+    </div>
+    <div class="log" id="log"></div>
+
+    <!-- Inline Ad -->
+    <div id="adMid" class="adSlot">
+      <script>
+        // YOUR_AD_CODE_HERE
+      </script>
+    </div>
+
+    <h3>Withdraw (sim)</h3>
+    <input id="withdrawAddr" placeholder="Wallet address"/>
+    <button class="btn" id="withdrawBtn" disabled>Request withdraw</button>
+    <div id="withdrawStatus" style="margin-top:6px;font-size:13px"></div>
+    <small>Requires ≥ $1 and KYC completed</small>
+
+    <div id="kycBlock">
+      <h3>KYC Verification</h3>
+      <form id="kycForm">
+        <label>Full Name</label><input id="kycName" required/>
+        <label>Email</label><input id="kycEmail" type="email" required/>
+        <label>Date of Birth</label><input id="kycDob" type="date" required/>
+        <label>Country</label><input id="kycCountry" required/>
+        <label>ID Upload (simulated)</label><input id="kycId" placeholder="Enter ID number"/>
+        <button type="submit" class="btn">Submit KYC</button>
+      </form>
+    </div>
+
+    <!-- Bottom Ad -->
+    <div id="adBottom" class="adSlot">
+      <script>
+        // YOUR_AD_CODE_HERE
+      </script>
+    </div>
+
+    <footer>
+      Created by <b>QUACKU_PL</b> 🦆
+    </footer>
+  </div>
+
+  <div class="panel">
+    <!-- Sidebar Ad -->
+    <div id="adSide" class="adSlot">
+      <script>
+        // YOUR_AD_CODE_HERE
+      </script>
+    </div>
+
+    <h2>Portfolio</h2>
+    <div id="portfolio"></div>
+    <h2>Shop</h2>
+    <div class="shop">
+      <button class="buyMiner" data-cost="100" data-rate="1">Basic Miner (100 sim)</button>
+      <button class="buyMiner" data-cost="450" data-rate="5">Pro Miner (450 sim)</button>
+      <button class="buyMiner" data-cost="1800" data-rate="20">Rig Pack (1800 sim)</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// === State ===
+let clicks=0,wins=0,simBalance=0;
+let miners=[],autoInt=null;
+const logEl=document.getElementById("log");
+const balances={"Shiba Inu":0,"Kaspa":0,"Stellar":0,"Bitcoin":0};
+const usdRates={"Shiba Inu":0.00001,"Kaspa":0.10,"Stellar":0.12,"Bitcoin":65000};
+let kycCompleted=localStorage.getItem("kycCompleted")==="true";
+
+// === RNG ===
+const WIN_DENOM=10n**20n;
+function secureBigInt(max){const bytes=Math.ceil(max.toString(2).length/8);
+  const buf=new Uint8Array(bytes);let v=0n;
+  while(true){crypto.getRandomValues(buf);v=0n;for(const b of buf)v=(v<<8n)+BigInt(b);
+    const limit=(1n<<(BigInt(bytes)*8n))-((1n<<(BigInt(bytes)*8n))%max);
+    if(v<limit)return v%max;}
+}
+function secureFloat(){const a=new Uint32Array(2);crypto.getRandomValues(a);
+  return(((a[0]&0x1FFFFF)*4294967296+a[1])/9007199254740992);}
+const weights={"Shiba Inu":69,"Kaspa":30,"Stellar":0.99999999,"Bitcoin":0.0000000001};
+const totalW=Object.values(weights).reduce((a,b)=>a+b,0);
+function chooseCoin(){let r=secureFloat()*totalW,c=0;
+  for(const [k,w] of Object.entries(weights)){c+=w;if(r<c)return k;}return "Bitcoin";}
+
+// === Actions ===
+function reward(coin){let amt=0;
+  if(coin=="Shiba Inu")amt=100000;
+  if(coin=="Kaspa")amt=5;
+  if(coin=="Stellar")amt=10;
+  if(coin=="Bitcoin")amt=0.00001;
+  balances[coin]+=amt;renderPortfolio();return amt;}
+function attemptWin(){return secureBigInt(WIN_DENOM)<1n;}
+function doClick(){clicks++;document.getElementById("clickCount").textContent=clicks;
+  simBalance++;document.getElementById("balanceSim").textContent=simBalance;
+  if(attemptWin()){wins++;document.getElementById("winCount").textContent=wins;
+    const coin=chooseCoin();const amt=reward(coin);
+    addLog(`WIN! ${amt} ${coin}`);}}
+
+function addLog(msg){const d=document.createElement("div");
+  d.textContent=`[${new Date().toLocaleTimeString()}] ${msg}`;
+  logEl.prepend(d);}
+function renderPortfolio(){const div=document.getElementById("portfolio");div.innerHTML="";
+  let total=0;for(const [c,a] of Object.entries(balances)){const usd=a*usdRates[c];total+=usd;
+    div.innerHTML+=`<div>${c}: ${a} (~$${usd.toFixed(2)})</div>`;}
+  div.innerHTML+=`<b>Total: $${total.toFixed(2)}</b>`;return total;}
+
+// === Withdraw ===
+document.getElementById("withdrawBtn").onclick=()=>{
+  const addr=document.getElementById("withdrawAddr").value.trim();
+  const status=document.getElementById("withdrawStatus");
+  if(!addr){status.textContent="Enter wallet address";return;}
+  if(!kycCompleted){status.textContent="KYC not completed.";return;}
+  let total=renderPortfolio();
+  if(total<1){status.textContent=`Too low (<$1). Currently $${total.toFixed(4)}`;return;}
+  const payload={address:addr,wins,balances,totalUsd:total.toFixed(2),timestamp:new Date().toISOString()};
+  status.textContent=`✅ Eligible. See console for payload.`;console.log("Withdraw payload:",payload);
+  addLog("Withdraw request submitted (sim).");};
+
+// === Shop / Miners ===
+document.querySelectorAll(".buyMiner").forEach(b=>b.onclick=()=>{
+  const cost=+b.dataset.cost,rate=+b.dataset.rate;
+  if(simBalance<cost){addLog("Not enough SimBalance.");return;}
+  simBalance-=cost;document.getElementById("balanceSim").textContent=simBalance;
+  miners.push(rate);if(autoInt)clearInterval(autoInt);
+  autoInt=setInterval(()=>miners.forEach(r=>{for(let i=0;i<r;i++)doClick();}),1000);
+  addLog(`Bought miner x${rate}`);});
+
+// === KYC ===
+if(kycCompleted){
+  document.getElementById("kycBlock").innerHTML="<p>✅ KYC Verified</p>";
+  document.getElementById("withdrawBtn").disabled=false;
+}
+document.getElementById("kycForm")?.addEventListener("submit",e=>{
+  e.preventDefault();
+  const data={
+    name:document.getElementById("kycName").value,
+    email:document.getElementById("kycEmail").value,
+    dob:document.getElementById("kycDob").value,
+    country:document.getElementById("kycCountry").value,
+    id:document.getElementById("kycId").value
+  };
+  console.log("KYC submitted (demo)",data);
+  localStorage.setItem("kycCompleted","true");
+  kycCompleted=true;
+  document.getElementById("kycBlock").innerHTML="<p>✅ KYC Verified</p>";
+  document.getElementById("withdrawBtn").disabled=false;
+  addLog("KYC verification completed.");
+});
+
+// === Adblock Detection ===
+window.addEventListener("load",()=>{
+  const testAd=document.querySelector("#adTop");
+  setTimeout(()=>{
+    if(!testAd || testAd.offsetHeight===0 || getComputedStyle(testAd).display==="none"){
+      document.body.innerHTML="<div style='color:white;background:#111;height:100vh;display:flex;align-items:center;justify-content:center;font-size:24px;text-align:center'>🚫 Please disable AdBlock to play Crypto Clicker 🚫</div>";
+    }
+  },1500);
+});
+
+// === Init ===
+document.getElementById("bigBtn").onclick=()=>doClick();
+renderPortfolio();
+</script>
+</body>
+</html>
